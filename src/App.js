@@ -1,7 +1,9 @@
 import './App.css'
 import './components/WeatherThisWeek.css'
+import './components/CurrentWeather.css'
 import CurrentWeather from './components/CurrentWeather'
 import WeatherThisWeek from './components/WeatherThisWeek'
+import NextWeekExpanded from './components/NextWeekExpanded'
 import React, {useState} from 'react'
 import axios from 'axios'
 import moment from 'moment'
@@ -14,6 +16,8 @@ function App() {
   const [apiData, setApiData] = useState([])
   const [nextWeekData, setNextWeekData] = useState([])
   const [showData, setShowData] = useState(false)
+  const [showCurrent, setShowCurrent] = useState(false)
+  const [showNext, setShowNext] = useState(false)
   const [windDirection, setWindDirection] = useState('')
   const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW']
 
@@ -27,6 +31,8 @@ function App() {
     setApiData(() => currentWeatherInfo.data)
     setNextWeekData(() => nextWeekWeather.data)
     setShowData(() => true)
+    setShowCurrent(() => true)
+    showNext && setShowNext(() => false)
   }
 
   const handleSearch = (event) => {
@@ -39,6 +45,13 @@ function App() {
     getData()
     setSearch('')
   }
+
+  const handleNextWeekClick = (event) => {
+    event.preventDefault()
+    setShowCurrent(() => false)
+    setShowNext(() => true)
+  }
+
 
   const getWindDirection = (angle) => {
     const angleMod = angle % 360
@@ -59,8 +72,8 @@ function App() {
         onChange={handleSearch} />
         <button onClick={handleClick}>Search</button>
       </div> {showData &&
-        <div>
-          <CurrentWeather
+        <div id="all-weather-parent">
+          {showCurrent && <CurrentWeather
             dateTime={moment.unix(apiData.dt).format('LLL')}
             name={apiData.name} 
             country={apiData.sys.country}
@@ -71,45 +84,61 @@ function App() {
             sunrise={moment.unix(apiData.sys.sunrise).utcOffset((apiData.timezone) / 60).format('LT')}
             sunset={moment.unix(apiData.sys.sunset).utcOffset((apiData.timezone) / 60).format('LT')} 
           />
+          }
+          {showNext && <NextWeekExpanded
+            name={'Portland'}
+            country={'US'}
+            dateTime={'7:00'}
+            temp={40}
+            
+          />
+          }
           <h2>7-day forecast</h2> 
-          <div className="next-week-parent">
+          <div className="next-week-parent" onClick={handleNextWeekClick}>
             <WeatherThisWeek 
+              id={'1'}
               date={moment.unix(nextWeekData.daily[1].dt).format('ddd, MMM DD')}
               icon={`http://openweathermap.org/img/wn/${nextWeekData.daily[1].weather[0].icon}@2x.png`}
               high={Math.round(nextWeekData.daily[1].temp.max)} low={Math.round(nextWeekData.daily[1].temp.min)}
               desc={nextWeekData.daily[1].weather[0].description}
             />  
             <WeatherThisWeek 
+              id={2}
               date={moment.unix(nextWeekData.daily[2].dt).format('ddd, MMM DD')}
               icon={`http://openweathermap.org/img/wn/${nextWeekData.daily[2].weather[0].icon}@2x.png`}
               high={Math.round(nextWeekData.daily[2].temp.max)} low={Math.round(nextWeekData.daily[2].temp.min)}
               desc={nextWeekData.daily[2].weather[0].description}
             />  
             <WeatherThisWeek 
+              id={3}
               date={moment.unix(nextWeekData.daily[3].dt).format('ddd, MMM DD')}
               icon={`http://openweathermap.org/img/wn/${nextWeekData.daily[3].weather[0].icon}@2x.png`}
               high={Math.round(nextWeekData.daily[3].temp.max)} low={Math.round(nextWeekData.daily[3].temp.min)}
               desc={nextWeekData.daily[3].weather[0].description}
             />  
             <WeatherThisWeek 
+              id={4}
               date={moment.unix(nextWeekData.daily[4].dt).format('ddd, MMM DD')}
               icon={`http://openweathermap.org/img/wn/${nextWeekData.daily[4].weather[0].icon}@2x.png`}
               high={Math.round(nextWeekData.daily[4].temp.max)} low={Math.round(nextWeekData.daily[4].temp.min)}
               desc={nextWeekData.daily[4].weather[0].description}
             />  
             <WeatherThisWeek 
+              id={5}
               date={moment.unix(nextWeekData.daily[5].dt).format('ddd, MMM DD')}
               icon={`http://openweathermap.org/img/wn/${nextWeekData.daily[5].weather[0].icon}@2x.png`}
               high={Math.round(nextWeekData.daily[5].temp.max)} low={Math.round(nextWeekData.daily[5].temp.min)}
               desc={nextWeekData.daily[5].weather[0].description}
             />  
             <WeatherThisWeek 
+              id={6}
               date={moment.unix(nextWeekData.daily[6].dt).format('ddd, MMM DD')}
               icon={`http://openweathermap.org/img/wn/${nextWeekData.daily[6].weather[0].icon}@2x.png`}
               high={Math.round(nextWeekData.daily[6].temp.max)} low={Math.round(nextWeekData.daily[6].temp.min)}
               desc={nextWeekData.daily[6].weather[0].description}
             />  
             <WeatherThisWeek 
+              id={7}
               date={moment.unix(nextWeekData.daily[7].dt).format('ddd, MMM DD')}
               icon={`http://openweathermap.org/img/wn/${nextWeekData.daily[7].weather[0].icon}@2x.png`}
               high={Math.round(nextWeekData.daily[7].temp.max)} low={Math.round(nextWeekData.daily[7].temp.min)}
