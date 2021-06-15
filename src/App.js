@@ -1,6 +1,7 @@
 import './App.css'
 import './components/WeatherThisWeek.css'
 import './components/CurrentWeather.css'
+import './components/NextWeekExpanded.css'
 import CurrentWeather from './components/CurrentWeather'
 import WeatherThisWeek from './components/WeatherThisWeek'
 import NextWeekExpanded from './components/NextWeekExpanded'
@@ -15,6 +16,7 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('')
   const [apiData, setApiData] = useState([])
   const [nextWeekData, setNextWeekData] = useState([])
+  const [nextWeekIndex, setNextWeekIndex] = useState('')
   const [showData, setShowData] = useState(false)
   const [showCurrent, setShowCurrent] = useState(false)
   const [showNext, setShowNext] = useState(false)
@@ -50,6 +52,7 @@ function App() {
     event.preventDefault()
     setShowCurrent(() => false)
     setShowNext(() => true)
+    setNextWeekIndex(() => event.target.id)
   }
 
 
@@ -86,17 +89,20 @@ function App() {
           />
           }
           {showNext && <NextWeekExpanded
-            name={'Portland'}
-            country={'US'}
-            dateTime={'7:00'}
-            temp={40}
-            
+            name={apiData.name}
+            day={moment.unix(nextWeekData.daily[nextWeekIndex].dt).format('dddd')}
+            date={moment.unix(nextWeekData.daily[nextWeekIndex].dt).format('MMM DD, YYYY')}
+            temp={Math.round(nextWeekData.daily[nextWeekIndex].temp.max)}
+            desc={nextWeekData.daily[nextWeekIndex].weather[0].description}
+            icon={`http://openweathermap.org/img/wn/${nextWeekData.daily[nextWeekIndex].weather[0].icon}@2x.png`}
+            sunrise={moment.unix(nextWeekData.daily[nextWeekIndex].sunrise).utcOffset((nextWeekData.timezone_offset) / 60).format('LT')}
+            sunset={moment.unix(nextWeekData.daily[nextWeekIndex].sunset).utcOffset((nextWeekData.timezone_offset) / 60).format('LT')}
           />
           }
           <h2>7-day forecast</h2> 
           <div className="next-week-parent" onClick={handleNextWeekClick}>
             <WeatherThisWeek 
-              id={'1'}
+              id={1}
               date={moment.unix(nextWeekData.daily[1].dt).format('ddd, MMM DD')}
               icon={`http://openweathermap.org/img/wn/${nextWeekData.daily[1].weather[0].icon}@2x.png`}
               high={Math.round(nextWeekData.daily[1].temp.max)} low={Math.round(nextWeekData.daily[1].temp.min)}

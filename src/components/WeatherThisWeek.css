@@ -15,6 +15,10 @@
     transition: all .2s ease-in-out;
 }
 
+p, img {
+    pointer-events: none;
+}
+
 .daily-weather:hover {
     transform: scale(1.25);
     cursor:pointer;

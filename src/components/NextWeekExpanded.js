@@ -1,15 +1,16 @@
 import React from 'react'
 
-const nextWeekExpanded = ({name, country, dateTime, icon, temp, sunrise, sunset}) => {
+const NextWeekExpanded = ({name, day, date, icon, temp, desc, sunrise, sunset}) => {
   return (
     <div id='nextWeekDiv'>
-      <h2 id="country-title">Current Weather in {name}, {country}</h2>
-      <p>{dateTime}</p>
+      <h2 id="country-title">Weather in {name} on {day}</h2>
+      <p>{date}</p>
       <img src={icon} alt="Weather icon."/>
-      <h2>{temp}° F</h2>
+      <h2>High of {temp}° F</h2>
+      <p>{desc}</p>
       <p>Sunrise: {sunrise} Sunset: {sunset}</p>
     </div>
     )
 }
 
-export default nextWeekExpanded
+export default NextWeekExpanded
