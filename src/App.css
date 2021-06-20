@@ -1,5 +1,13 @@
 body {
-  background-color: white;
+  background: #032550;
+  color: white;
+}
+
+#app-parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
 }
 
 .App {
@@ -26,6 +34,29 @@ body {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+input[type=text] {
+  width: 450px;
+  height: 40px;
+}
+
+input[type=button] {
+  height: 38px;
+  margin-left: -85px;
+  background-color: #032550;
+  color: rgb(224, 224, 224);
+}
+
+input {
+  outline: none;
+  font-size: 20px;
+}
+
+input[type=button]:hover {
+  cursor: pointer;
+  background-color: #04316d;
+  transition-delay: 5ms;
 }
 
 #all-weather-parent {

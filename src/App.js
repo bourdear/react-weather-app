@@ -2,6 +2,7 @@ import './App.css'
 import './components/WeatherThisWeek.css'
 import './components/CurrentWeather.css'
 import './components/NextWeekExpanded.css'
+import stateArr from './usStates'
 import CurrentWeather from './components/CurrentWeather'
 import WeatherThisWeek from './components/WeatherThisWeek'
 import NextWeekExpanded from './components/NextWeekExpanded'
@@ -9,7 +10,6 @@ import React, {useState} from 'react'
 import axios from 'axios'
 import moment from 'moment'
 import apiKey from './openWeatherKey'
-
 
 function App() {
   const [search, setSearch] = useState('')
@@ -39,9 +39,17 @@ function App() {
 
   const handleSearch = (event) => {
     setSearch(() => event.target.value)
-    setSearchTerm(() => event.target.value.split(' ').join('%20'))
-  }
+    if (event.target.value.split(',')[1] !== undefined && event.target.value.split(',').length < 3) {
+      const secondItem = (event.target.value.split(',')[1]).toLowerCase().trim()
+      if (stateArr.some(i => i.name.toLowerCase().includes(secondItem)) || stateArr.some(i => i.abbreviation.toLowerCase().includes(secondItem))) {
+        setSearchTerm(() => `${event.target.value}, us`)
+      }
+    } else {
+      setSearchTerm(() => event.target.value)
+    }
 
+  }
+   
   const handleClick = (event) => {
     event.preventDefault()
     getData()
@@ -55,7 +63,6 @@ function App() {
     setNextWeekIndex(() => event.target.id)
   }
 
-
   const getWindDirection = (angle) => {
     const angleMod = angle % 360
     const index = Math.round((angleMod < 0 ? angleMod + 360 : angleMod) / 45) % 8
@@ -67,13 +74,17 @@ function App() {
   }
 
   return (
+    <div id="app-parent">
     <div className="App">
       <h1>How's the Weather?</h1>
+      <h2>Worldwide weather at your fingertips</h2>
       <div>
         Please enter a city <input
         value={search}
+        type="text"
+        placeholder="City, State or City, Country"
         onChange={handleSearch} />
-        <button onClick={handleClick}>Search</button>
+        <input type="button" value="Search" onClick={handleClick} />
       </div> {showData &&
         <div id="all-weather-parent">
           {showCurrent && <CurrentWeather
@@ -153,6 +164,7 @@ function App() {
           </div>     
         </div>
       }  
+    </div>
     </div>
   )
 }
