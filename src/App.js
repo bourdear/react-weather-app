@@ -5,6 +5,7 @@ import './components/NextWeekExpanded.css'
 import logo from './assets/logo.png'
 import stateArr from './usStates'
 import CurrentWeather from './components/CurrentWeather'
+import SearchBar from './components/SearchBar'
 import WeatherThisWeek from './components/WeatherThisWeek'
 import NextWeekExpanded from './components/NextWeekExpanded'
 import React, {useState} from 'react'
@@ -80,18 +81,15 @@ function App() {
         <ul>
           <li><img src={logo} alt="Weather Logo" /></li>
           <li>MyWeather</li>
+          <li>{showData && <SearchBar search={search} handleSearch={handleSearch} handleClick={handleClick} />}</li>
         </ul>
       </nav>
-    <div id="App">
-      <h1>How's the Weather?</h1>
-      <h2>Worldwide weather at your fingertips</h2>
-        Please enter a city <input
-        value={search}
-        type="text"
-        placeholder="City, State or City, Country"
-        onChange={handleSearch} />
-        <input type="button" value="Search" onClick={handleClick} />
+      {!showData &&<div id="App">
+        <h1>Worldwide weather at your fingertips</h1>
+          <p>Please enter a city</p> 
+          <SearchBar search={search} handleSearch={handleSearch} handleClick={handleClick} />
       </div>
+      }
       {showData &&
         <div id="all-weather-parent">
           {showCurrent && <CurrentWeather
