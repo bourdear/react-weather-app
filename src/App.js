@@ -2,6 +2,7 @@ import './App.css'
 import './components/WeatherThisWeek.css'
 import './components/CurrentWeather.css'
 import './components/NextWeekExpanded.css'
+import logo from './assets/logo.png'
 import stateArr from './usStates'
 import CurrentWeather from './components/CurrentWeather'
 import WeatherThisWeek from './components/WeatherThisWeek'
@@ -75,17 +76,23 @@ function App() {
 
   return (
     <div id="app-parent">
-    <div className="App">
+      <nav>
+        <ul>
+          <li><img src={logo} alt="Weather Logo" /></li>
+          <li>MyWeather</li>
+        </ul>
+      </nav>
+    <div id="App">
       <h1>How's the Weather?</h1>
       <h2>Worldwide weather at your fingertips</h2>
-      <div>
         Please enter a city <input
         value={search}
         type="text"
         placeholder="City, State or City, Country"
         onChange={handleSearch} />
         <input type="button" value="Search" onClick={handleClick} />
-      </div> {showData &&
+      </div>
+      {showData &&
         <div id="all-weather-parent">
           {showCurrent && <CurrentWeather
             dateTime={moment.unix(apiData.dt).format('LLL')}
@@ -164,7 +171,6 @@ function App() {
           </div>     
         </div>
       }  
-    </div>
     </div>
   )
 }

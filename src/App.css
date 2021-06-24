@@ -1,16 +1,19 @@
-body {
-  background: #032550;
+html, body {
+  background: #132c40;
   color: white;
+  height: 100%;
+  margin: 0;
 }
 
 #app-parent {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 70vh;
+  min-height: 70vh;
+  flex-direction: column;
 }
 
-.App {
+#App {
   text-align: center;
 }
 
@@ -48,19 +51,51 @@ input[type=button] {
   color: rgb(224, 224, 224);
 }
 
-input {
-  outline: none;
-  font-size: 20px;
-}
-
 input[type=button]:hover {
   cursor: pointer;
   background-color: #04316d;
   transition-delay: 5ms;
 }
 
+input {
+  outline: none;
+  font-size: 20px;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  display: inline-block;
+  -webkit-padding-start: 0;
+}
+
+nav {
+  position: fixed;
+  top: 0px;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  width: 100%;
+  color: #04316d;
+  background: white;
+}
+
+li {
+  font-size: 30px;
+}
+
+li:first-child {
+  position: absolute;
+  left: 0;
+}
+
+img {
+  height: 60px;
+}
+
 #all-weather-parent {
   justify-content: center;
+  text-align: center;
 }
 
 .next-week-parent {

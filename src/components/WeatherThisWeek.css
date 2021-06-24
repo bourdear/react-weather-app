@@ -1,5 +1,4 @@
 .daily-weather {
-    background-image: url("/src/next-week-bg.jpg");
     display: block;
     width: 200px;
     box-shadow:
@@ -11,7 +10,8 @@
     0 100px 80px rgba(0, 0, 0, 0.12)
     ;
     border-radius: 10px;
-    color: white;
+    color: #132c40;
+    background: linear-gradient(180deg, white, #c9c9c9);
     transition: all .2s ease-in-out;
 }
 
