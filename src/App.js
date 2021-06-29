@@ -93,13 +93,19 @@ function App() {
       {showData &&
         <div id="all-weather-parent">
           {showCurrent && <CurrentWeather
-            dateTime={moment.unix(apiData.dt).format('LLL')}
+            time={moment.unix(apiData.dt).format('LT')}
             name={apiData.name} 
             country={apiData.sys.country}
             icon={`http://openweathermap.org/img/wn/${apiData.weather[0].icon}@2x.png`}
             desc={capFirstLetter(apiData.weather[0].description)}
+            high={Math.round(apiData.main.temp_max)}
+            low={Math.round(apiData.main.temp_min)}
+            humidity={apiData.main.humidity}
+            uv={Math.round(nextWeekData.daily[0].uvi)}
+            wind={apiData.wind.deg}
+            pressure={apiData.main.pressure * .030}
+            visibility={Math.round(nextWeekData.daily[0].dew_point)}
             temp={Math.round(apiData.main.temp)}
-            feelsLike={Math.round(apiData.main.feels_like)}
             sunrise={moment.unix(apiData.sys.sunrise).utcOffset((apiData.timezone) / 60).format('LT')}
             sunset={moment.unix(apiData.sys.sunset).utcOffset((apiData.timezone) / 60).format('LT')} 
           />
