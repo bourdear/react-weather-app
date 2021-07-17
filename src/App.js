@@ -102,7 +102,7 @@ function App() {
             low={Math.round(apiData.main.temp_min)}
             humidity={apiData.main.humidity}
             uv={Math.round(nextWeekData.daily[0].uvi)}
-            wind={apiData.wind.deg}
+            wind={nextWeekData.daily[0].wind_gust}
             pressure={apiData.main.pressure * .030}
             visibility={Math.round(nextWeekData.daily[0].dew_point)}
             temp={Math.round(apiData.main.temp)}
@@ -114,11 +114,15 @@ function App() {
             name={apiData.name}
             day={moment.unix(nextWeekData.daily[nextWeekIndex].dt).format('dddd')}
             date={moment.unix(nextWeekData.daily[nextWeekIndex].dt).format('MMM DD, YYYY')}
-            temp={Math.round(nextWeekData.daily[nextWeekIndex].temp.max)}
+            high={Math.round(nextWeekData.daily[nextWeekIndex].temp.max)}
+            low={Math.round(nextWeekData.daily[nextWeekIndex].temp.min)}
             desc={nextWeekData.daily[nextWeekIndex].weather[0].description}
             icon={`http://openweathermap.org/img/wn/${nextWeekData.daily[nextWeekIndex].weather[0].icon}@2x.png`}
-            sunrise={moment.unix(nextWeekData.daily[nextWeekIndex].sunrise).utcOffset((nextWeekData.timezone_offset) / 60).format('LT')}
-            sunset={moment.unix(nextWeekData.daily[nextWeekIndex].sunset).utcOffset((nextWeekData.timezone_offset) / 60).format('LT')}
+            humidity={nextWeekData.daily[nextWeekIndex].humidity}
+            uv={nextWeekData.daily[nextWeekIndex].uvi}
+            wind={nextWeekData.daily[nextWeekIndex].wind_gust}
+            pressure={nextWeekData.daily[nextWeekIndex].pressure}
+            visibility={nextWeekData.daily[nextWeekIndex].dew_point}
           />
           }
           <h2>7-day forecast</h2> 
