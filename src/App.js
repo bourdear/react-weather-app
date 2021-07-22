@@ -2,6 +2,7 @@ import './App.css'
 import './components/WeatherThisWeek.css'
 import './components/CurrentWeather.css'
 import './components/NextWeekExpanded.css'
+import './components/SearchBar.css'
 import logo from './assets/logo.png'
 import stateArr from './usStates'
 import CurrentWeather from './components/CurrentWeather'
@@ -18,7 +19,7 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('')
   const [apiData, setApiData] = useState([])
   const [nextWeekData, setNextWeekData] = useState([])
-  const [nextWeekIndex, setNextWeekIndex] = useState('')
+  const [nextWeekIndex, setNextWeekIndex] = useState(1)
   const [showData, setShowData] = useState(false)
   const [showCurrent, setShowCurrent] = useState(false)
   const [showNext, setShowNext] = useState(false)
@@ -60,7 +61,6 @@ function App() {
 
   const handleNextWeekClick = (event) => {
     event.preventDefault()
-    setShowCurrent(() => false)
     setShowNext(() => true)
     setNextWeekIndex(() => event.target.id)
   }
@@ -92,7 +92,8 @@ function App() {
       }
       {showData &&
         <div id="all-weather-parent">
-          {showCurrent && <CurrentWeather
+          {showCurrent && <div id="display">
+            <CurrentWeather
             time={moment.unix(apiData.dt).format('LT')}
             name={apiData.name} 
             country={apiData.sys.country}
@@ -109,8 +110,7 @@ function App() {
             sunrise={moment.unix(apiData.sys.sunrise).utcOffset((apiData.timezone) / 60).format('LT')}
             sunset={moment.unix(apiData.sys.sunset).utcOffset((apiData.timezone) / 60).format('LT')} 
           />
-          }
-          {showNext && <NextWeekExpanded
+          <NextWeekExpanded
             name={apiData.name}
             day={moment.unix(nextWeekData.daily[nextWeekIndex].dt).format('dddd')}
             date={moment.unix(nextWeekData.daily[nextWeekIndex].dt).format('MMM DD, YYYY')}
@@ -124,6 +124,7 @@ function App() {
             pressure={nextWeekData.daily[nextWeekIndex].pressure}
             visibility={nextWeekData.daily[nextWeekIndex].dew_point}
           />
+          </div>
           }
           <h2>7-day forecast</h2> 
           <div className="next-week-parent" onClick={handleNextWeekClick}>
@@ -179,6 +180,7 @@ function App() {
           </div>     
         </div>
       }  
+      <div id="gray-div"></div>
     </div>
   )
 }

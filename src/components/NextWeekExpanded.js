@@ -8,7 +8,8 @@ const NextWeekExpanded = ({name, day, date, high, low, icon, desc, humidity, uv,
       <h2>{high}° / {low}°</h2>
       <img src={icon} alt="Weather icon."/>
       <p>{desc}</p>
-      <table>
+      <div id="table-parent">
+      <table id="left-table">
         <tbody>
           <tr>
             <td>High / Low</td>
@@ -40,6 +41,7 @@ const NextWeekExpanded = ({name, day, date, high, low, icon, desc, humidity, uv,
           </tr>
         </tbody>
       </table>
+      </div>
     </div>
     )
 }

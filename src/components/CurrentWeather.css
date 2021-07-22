@@ -22,22 +22,21 @@ p {
     float: left;
 }
 
-table {
-    margin-left: -40px;
-    border-collapse: separate;
-    border-spacing: 40px 0px;
+#table-parent {
+    display: flex;
+    justify-content: space-evenly;
 }
-
-
 
 #current-weather-div {
     text-align: left;
-    color: #000000;
-    background-image: linear-gradient(180deg, #4cafc5, #306f7e);
-    width: 60%;
+    float: left;
+    color: #132c40;
+    background-color: white;
+    width: 50%;
+    height: 375px;
     margin-left: auto;
     margin-right: auto;
-    border-radius: 10px;
+    border-radius: 2px;
     box-shadow:
     0 2.8px 2.2px rgba(0, 0, 0, 0.034),
     0 6.7px 5.3px rgba(0, 0, 0, 0.048),

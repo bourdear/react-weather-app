@@ -3,13 +3,14 @@ html, body {
   color: white;
   height: 100%;
   margin: 0;
+  overflow: hidden;
 }
 
 #app-parent {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 70vh;
+  height: 100vh;
   flex-direction: column;
 }
 
@@ -101,14 +102,24 @@ img {
 }
 
 #all-weather-parent {
-  justify-content: center;
   text-align: center;
+  z-index: 1;
 }
 
 .next-week-parent {
-  max-width: 60%;
+  max-width: 80%;
+  height: 300px;
   margin-left: auto;
   margin-right: auto;
   display: flex;
   justify-content: space-evenly;
+}
+
+#gray-div {
+  background-color: rgb(235, 235, 235);
+  height: 300px;
+  width: 100%;
+  bottom: 0;
+  position: absolute;
+  z-index: 0;
 }
