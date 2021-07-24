@@ -104,15 +104,18 @@ img {
 #all-weather-parent {
   text-align: center;
   z-index: 1;
+  margin-top: 50px;
+  width: 85%;
 }
 
 .next-week-parent {
-  max-width: 80%;
   height: 300px;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 50px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
 #gray-div {
@@ -122,4 +125,12 @@ img {
   bottom: 0;
   position: absolute;
   z-index: 0;
+}
+
+#display {
+  width: 100%;
+}
+
+#forecast-div {
+  margin-top: 425px;
 }

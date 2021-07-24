@@ -62,7 +62,12 @@ function App() {
   const handleNextWeekClick = (event) => {
     event.preventDefault()
     setShowNext(() => true)
-    setNextWeekIndex(() => event.target.id)
+    console.log(event.target.id)
+    if (event.target.id) {
+      setNextWeekIndex(() => event.target.id)
+    } else {
+      setNextWeekIndex(() => 1)
+    }
   }
 
   const getWindDirection = (angle) => {
@@ -125,8 +130,10 @@ function App() {
             visibility={nextWeekData.daily[nextWeekIndex].dew_point}
           />
           </div>
-          }
-          <h2>7-day forecast</h2> 
+          } 
+          <div id="forecast-div">
+            <h2>7-day forecast</h2>
+          </div>
           <div className="next-week-parent" onClick={handleNextWeekClick}>
             <WeatherThisWeek 
               id={1}
