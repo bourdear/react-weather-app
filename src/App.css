@@ -16,6 +16,7 @@ html, body {
 
 #App {
   text-align: center;
+  margin-top: -150px;
 }
 
 .App-logo {

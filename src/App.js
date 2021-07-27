@@ -62,7 +62,6 @@ function App() {
   const handleNextWeekClick = (event) => {
     event.preventDefault()
     setShowNext(() => true)
-    console.log(event.target.id)
     if (event.target.id) {
       setNextWeekIndex(() => event.target.id)
     } else {
@@ -80,6 +79,7 @@ function App() {
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
 
+  console.log(nextWeekData)
   return (
     <div id="app-parent">
       <nav>
@@ -108,7 +108,7 @@ function App() {
             low={Math.round(apiData.main.temp_min)}
             humidity={apiData.main.humidity}
             uv={Math.round(nextWeekData.daily[0].uvi)}
-            wind={nextWeekData.daily[0].wind_gust}
+            wind={nextWeekData.daily[0].wind_speed}
             pressure={apiData.main.pressure * .030}
             visibility={Math.round(nextWeekData.daily[0].dew_point)}
             temp={Math.round(apiData.main.temp)}
@@ -121,11 +121,11 @@ function App() {
             date={moment.unix(nextWeekData.daily[nextWeekIndex].dt).format('MMM DD, YYYY')}
             high={Math.round(nextWeekData.daily[nextWeekIndex].temp.max)}
             low={Math.round(nextWeekData.daily[nextWeekIndex].temp.min)}
-            desc={nextWeekData.daily[nextWeekIndex].weather[0].description}
+            desc={capFirstLetter(nextWeekData.daily[nextWeekIndex].weather[0].description)}
             icon={`http://openweathermap.org/img/wn/${nextWeekData.daily[nextWeekIndex].weather[0].icon}@2x.png`}
             humidity={nextWeekData.daily[nextWeekIndex].humidity}
             uv={nextWeekData.daily[nextWeekIndex].uvi}
-            wind={nextWeekData.daily[nextWeekIndex].wind_gust}
+            wind={nextWeekData.daily[nextWeekIndex].wind_speed}
             pressure={nextWeekData.daily[nextWeekIndex].pressure}
             visibility={nextWeekData.daily[nextWeekIndex].dew_point}
           />

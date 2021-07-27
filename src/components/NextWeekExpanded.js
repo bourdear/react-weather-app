@@ -28,12 +28,12 @@ const NextWeekExpanded = ({name, day, date, high, low, icon, desc, humidity, uv,
       <table>
         <tbody>
           <tr>
-            <td>Wind Gusts</td>
+            <td>Wind Speed</td>
             <td>{wind} mph</td>
           </tr>
           <tr>
             <td>Pressure</td>
-            <td>{(pressure * .030).toFixed(2)} in</td>
+            <td>{(pressure * .030).toFixed(2)} inHg</td>
           </tr>
           <tr>
             <td>Visibility</td>

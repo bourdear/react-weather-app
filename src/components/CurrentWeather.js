@@ -30,7 +30,7 @@ const CurrentWeather = ({ time, name, country, icon, desc, high, low, humidity, 
       <table>
         <tbody>
           <tr>
-            <td>Wind Gusts</td>
+            <td>Wind Speed</td>
             <td>{wind} mph</td>
           </tr>
           <tr>
@@ -39,7 +39,7 @@ const CurrentWeather = ({ time, name, country, icon, desc, high, low, humidity, 
           </tr>
           <tr>
             <td>Visibility</td>
-            <td>{(visibility * 0.000621371).toFixed(2)} mi</td>
+            <td>{(visibility * 0.000621371).toFixed(2)} miles</td>
           </tr>
         </tbody>
       </table>
