@@ -187,8 +187,10 @@ function App() {
           </div>     
         </div>
       }  
+      {showData &&
       <div id="gray-div"></div>
-    </div>
+      }
+      </div>
   )
 }
 

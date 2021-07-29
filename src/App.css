@@ -10,13 +10,12 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   flex-direction: column;
 }
 
 #App {
   text-align: center;
-  margin-top: -150px;
+  margin-top: 275px;
 }
 
 .App-logo {
@@ -105,7 +104,7 @@ img {
 #all-weather-parent {
   text-align: center;
   z-index: 1;
-  margin-top: 50px;
+  margin-top: 125px;
   width: 85%;
 }
 
@@ -121,10 +120,9 @@ img {
 
 #gray-div {
   background-color: rgb(235, 235, 235);
-  height: 300px;
+  height: 40vh;
   width: 100%;
-  bottom: 0;
-  position: absolute;
+  margin-top: -200px;
   z-index: 0;
 }
 
@@ -133,5 +131,5 @@ img {
 }
 
 #forecast-div {
-  margin-top: 425px;
+  margin-top: 400px;
 }
