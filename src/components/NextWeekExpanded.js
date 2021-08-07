@@ -1,11 +1,11 @@
 import React from 'react'
 
-const NextWeekExpanded = ({name, day, date, high, low, icon, desc, humidity, uv, wind, pressure, visibility}) => {
+const NextWeekExpanded = ({name, day, date, high, low, icon, desc, humidity, uv, wind, pressure, dewPoint}) => {
   return (
     <div id='nextWeekDiv'>
       <h2 id="country-title">Weather in {name} on {day}</h2>
       <p>{date}</p>
-      <h2>{high}° / {low}°</h2>
+      <h2>{high}° / {low}° F</h2>
       <img src={icon} alt="Weather icon."/>
       <p>{desc}</p>
       <div id="table-parent">
@@ -17,7 +17,7 @@ const NextWeekExpanded = ({name, day, date, high, low, icon, desc, humidity, uv,
           </tr>
           <tr>
             <td>Humidity</td>
-            <td>{humidity} %</td>
+            <td>{humidity}%</td>
           </tr>
           <tr>
             <td>UV Index</td>
@@ -36,8 +36,8 @@ const NextWeekExpanded = ({name, day, date, high, low, icon, desc, humidity, uv,
             <td>{(pressure * .030).toFixed(2)} inHg</td>
           </tr>
           <tr>
-            <td>Visibility</td>
-            <td>{Math.round(visibility)} miles</td>
+            <td>Dew Point</td>
+            <td>{Math.round(dewPoint)}°F</td>
           </tr>
         </tbody>
       </table>

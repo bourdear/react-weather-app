@@ -23,8 +23,6 @@ function App() {
   const [showData, setShowData] = useState(false)
   const [showCurrent, setShowCurrent] = useState(false)
   const [showNext, setShowNext] = useState(false)
-  const [windDirection, setWindDirection] = useState('')
-  const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW']
 
   const getData = async () => {
     const apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${searchTerm}&appid=${apiKey}&units=imperial`
@@ -69,17 +67,12 @@ function App() {
     }
   }
 
-  const getWindDirection = (angle) => {
-    const angleMod = angle % 360
-    const index = Math.round((angleMod < 0 ? angleMod + 360 : angleMod) / 45) % 8
-    setWindDirection(directions[index])
-  } 
-
   const capFirstLetter = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
 
   console.log(nextWeekData)
+
   return (
     <div id="app-parent">
       <nav>
@@ -110,7 +103,7 @@ function App() {
             uv={Math.round(nextWeekData.daily[0].uvi)}
             wind={nextWeekData.daily[0].wind_speed}
             pressure={apiData.main.pressure * .030}
-            visibility={Math.round(nextWeekData.daily[0].dew_point)}
+            visibility={Math.round(apiData.visibility)}
             temp={Math.round(apiData.main.temp)}
             sunrise={moment.unix(apiData.sys.sunrise).utcOffset((apiData.timezone) / 60).format('LT')}
             sunset={moment.unix(apiData.sys.sunset).utcOffset((apiData.timezone) / 60).format('LT')} 
@@ -127,7 +120,7 @@ function App() {
             uv={nextWeekData.daily[nextWeekIndex].uvi}
             wind={nextWeekData.daily[nextWeekIndex].wind_speed}
             pressure={nextWeekData.daily[nextWeekIndex].pressure}
-            visibility={nextWeekData.daily[nextWeekIndex].dew_point}
+            dewPoint={nextWeekData.daily[nextWeekIndex].dew_point}
           />
           </div>
           } 
