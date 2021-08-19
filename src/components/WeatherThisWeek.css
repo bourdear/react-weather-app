@@ -9,7 +9,6 @@
     0 41.8px 33.4px rgba(0, 0, 0, 0.086),
     0 100px 80px rgba(0, 0, 0, 0.12)
     ;
-    padding-top: 40px;
     border-radius: 2px;
     color: #132c40;
     background: linear-gradient(180deg, white, #c9c9c9);
@@ -21,7 +20,31 @@ p, img {
 }
 
 .daily-weather:hover {
-    transform: scale(1.25);
     cursor:pointer;
 }
 
+@media (min-width: 1200px) {
+    .daily-weather {
+        height: 185px;
+        padding-top: 20px;
+        margin-top: 15px;
+        font-size: 12px;
+    }
+
+    .daily-weather:hover {
+        transform: scale(1.1);
+    }
+}
+
+@media (min-width: 1700px) {
+    .daily-weather {
+        height: 250px;
+        padding-top: 40px;
+        margin-top: 0px;
+        font-size: 16px;
+    }
+
+    .daily-weather:hover {
+        transform: scale(1.15)
+    }
+}

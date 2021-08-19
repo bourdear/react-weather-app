@@ -1,8 +1,8 @@
-#nextWeekDiv {
+#next-week-div {
     background-color: white;
     color: #132c40;
     width: 40%;
-    height: 400px;
+
     float: right;
     border-radius: 2px;
     box-shadow:
@@ -23,3 +23,16 @@ justify-content: space-evenly;
 #left-table {
     float: left;
 }
+
+@media (min-width: 1200px) {
+    #next-week-div {
+        font-size: 12px;
+        height: 315px;
+    }
+}  
+  @media (min-width: 1700px) {
+    #next-week-div {
+        font-size: 15px;
+        height: 400px;
+    }   
+  }

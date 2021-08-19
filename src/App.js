@@ -48,7 +48,6 @@ function App() {
     } else {
       setSearchTerm(() => event.target.value)
     }
-
   }
    
   const handleClick = (event) => {
@@ -125,7 +124,7 @@ function App() {
           </div>
           } 
           <div id="forecast-div">
-            <h2>7-day forecast</h2>
+            <h2 class="smaller-header">7-day forecast</h2>
           </div>
           <div className="next-week-parent" onClick={handleNextWeekClick}>
             <WeatherThisWeek 

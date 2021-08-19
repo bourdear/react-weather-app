@@ -2,8 +2,8 @@ import React from 'react'
 
 const NextWeekExpanded = ({name, day, date, high, low, icon, desc, humidity, uv, wind, pressure, dewPoint}) => {
   return (
-    <div id='nextWeekDiv'>
-      <h2 id="country-title">Weather in {name} on {day}</h2>
+    <div id='next-week-div'>
+      <h2 class="smaller-header">Weather in {name} on {day}</h2>
       <p>{date}</p>
       <h2>{high}° / {low}° F</h2>
       <img src={icon} alt="Weather icon."/>
