@@ -3,7 +3,7 @@ import React from 'react'
 const CurrentWeather = ({ time, name, country, icon, desc, high, low, humidity, uv, wind, pressure, visibility, temp, sunrise, sunset }) => {
   return (
     <div id="current-weather-div">
-      <h2 class="smaller-header">Current Weather in {name}, {country}</h2>
+      <h2 className="smaller-header">Current Weather in {name}, {country}</h2>
       <p>As of {time}</p>
       <div id="temp-icon">
         <h2 id="temp">{temp}° F</h2>

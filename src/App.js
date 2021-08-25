@@ -23,20 +23,39 @@ function App() {
   const [showData, setShowData] = useState(false)
   const [showCurrent, setShowCurrent] = useState(false)
   const [showNext, setShowNext] = useState(false)
+  const [showErrOne, setShowErrOne] = useState(false)
+  const [showErrTwo, setShowErrTwo] = useState(false)
+
+  const errMessage = () => {
+    if (!showData) {
+      setShowErrOne(() => true)
+    } else {
+      setShowErrTwo(() => true)
+    }
+  }
 
   const getData = async () => {
-    const apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${searchTerm}&appid=${apiKey}&units=imperial`
-    const currentWeatherInfo = await axios.get(apiURL)
-    const lat = currentWeatherInfo.data.coord.lat
-    const lon = currentWeatherInfo.data.coord.lon
-    const nextWeekApiURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=current,hourly&appid=${apiKey}&units=imperial`
-    const nextWeekWeather = await axios.get(nextWeekApiURL)
-    setApiData(() => currentWeatherInfo.data)
-    setNextWeekData(() => nextWeekWeather.data)
-    setShowData(() => true)
-    setShowCurrent(() => true)
-    showNext && setShowNext(() => false)
-  }
+    try {
+      const apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${searchTerm}&appid=${apiKey}&units=imperial`
+      const currentWeatherInfo = await axios.get(apiURL)
+      const lat = currentWeatherInfo.data.coord.lat
+      const lon = currentWeatherInfo.data.coord.lon
+      const nextWeekApiURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=current,hourly&appid=${apiKey}&units=imperial`
+      const nextWeekWeather = await axios.get(nextWeekApiURL)
+      setApiData(() => currentWeatherInfo.data)
+      setNextWeekData(() => nextWeekWeather.data)
+      setShowData(() => true)
+      setShowCurrent(() => true)
+      showNext && setShowNext(() => false)
+      setShowErrTwo(() => false)
+    }
+      catch(err) {
+        if (err.response.status === 404) {
+          errMessage()
+        }
+      }
+    }
+  
 
   const handleSearch = (event) => {
     setSearch(() => event.target.value)
@@ -70,21 +89,23 @@ function App() {
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
 
-  console.log(nextWeekData)
-
   return (
     <div id="app-parent">
       <nav>
         <ul>
           <li><img src={logo} alt="Weather Logo" /></li>
           <li>MyWeather</li>
-          <li>{showData && <SearchBar search={search} handleSearch={handleSearch} handleClick={handleClick} />}</li>
+          <li>{showData && <SearchBar search={search} handleSearch={handleSearch} handleClick={handleClick} showErr={showErrTwo} />}</li>
         </ul>
       </nav>
       {!showData &&<div id="App">
         <h1>Worldwide weather at your fingertips</h1>
           <p>Please enter a city</p> 
-          <SearchBar search={search} handleSearch={handleSearch} handleClick={handleClick} />
+          <SearchBar search={search} handleSearch={handleSearch} handleClick={handleClick}/>
+          {showErrOne && 
+            <p>Sorry, we can't seem to find the city you're looking for.
+            <br/>Try using the format "City, State" or "City, Country."</p>          
+          }
       </div>
       }
       {showData &&
@@ -124,7 +145,7 @@ function App() {
           </div>
           } 
           <div id="forecast-div">
-            <h2 class="smaller-header">7-day forecast</h2>
+            <h2 className="smaller-header">7-day forecast</h2>
           </div>
           <div className="next-week-parent" onClick={handleNextWeekClick}>
             <WeatherThisWeek 
