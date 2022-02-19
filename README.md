@@ -7,6 +7,9 @@ MyWeather is a single-page web application built in React that pulls data from t
 ![App demonstration.](/images/weather-example.gif?raw=true)
 
 &nbsp;
+### <div align="center">[Click Here for a Live Demo](https://bourdear.github.io/react-weather-app/)</div>
+&nbsp;
+
 ## How to Use
 * Input a city name and click the "Search" button.
 * Click one of the seven condensed divs to get expanded weather information for that day.
