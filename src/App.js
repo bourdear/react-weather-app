@@ -12,7 +12,7 @@ import NextWeekExpanded from './components/NextWeekExpanded'
 import React, {useState} from 'react'
 import axios from 'axios'
 import moment from 'moment'
-import apiKey from './openWeatherKey'
+// import apiKey from './openWeatherKey'
 
 function App() {
   const [search, setSearch] = useState('')
@@ -25,6 +25,7 @@ function App() {
   const [showNext, setShowNext] = useState(false)
   const [showErrOne, setShowErrOne] = useState(false)
   const [showErrTwo, setShowErrTwo] = useState(false)
+  const apiKey = process.env.REACT_APP_WEATHER_KEY
 
   const errMessage = () => {
     if (!showData) {
@@ -49,21 +50,22 @@ function App() {
       showNext && setShowNext(() => false)
       setShowErrTwo(() => false)
     }
-      catch(err) {
-        if (err.response.status === 404) {
-          errMessage()
-        }
+    catch(err) {
+      if (err.response.status === 404) {
+        errMessage()
       }
     }
-  
+  }  
 
   const handleSearch = (event) => {
     setSearch(() => event.target.value)
-    if (event.target.value.split(',')[1] !== undefined && event.target.value.split(',').length < 3) {
-      const secondItem = (event.target.value.split(',')[1]).toLowerCase().trim()
-      if (stateArr.some(i => i.name.toLowerCase().includes(secondItem)) || stateArr.some(i => i.abbreviation.toLowerCase().includes(secondItem))) {
-        setSearchTerm(() => `${event.target.value}, us`)
-      }
+    if ((event.target.value.split(',')[1])
+      && (event.target.value.split(',').length < 3)) {
+        const secondItem = (event.target.value.split(',')[1]).toLowerCase().trim()
+        if ((stateArr.some(i => i.name.toLowerCase().includes(secondItem)))
+           || (stateArr.some(i => i.abbreviation.toLowerCase().includes(secondItem)))) {
+            setSearchTerm(() => `${event.target.value}, us`)
+        }
     } else {
       setSearchTerm(() => event.target.value)
     }
@@ -99,7 +101,7 @@ function App() {
         </ul>
       </nav>
       {!showData &&<div id="App">
-        <h1>Worldwide weather at your fingertips</h1>
+        <h1>Worldwide Weather at Your Fingertips</h1>
           <p>Please enter a city</p> 
           <SearchBar search={search} handleSearch={handleSearch} handleClick={handleClick}/>
           {showErrOne && 
