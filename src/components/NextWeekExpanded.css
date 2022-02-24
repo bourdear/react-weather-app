@@ -28,12 +28,12 @@ text-align: left;
 @media (min-width: 1200px) {
     #next-week-div {
         font-size: 12px;
-        height: 315px;
+        height: 340px;
     }
 }  
   @media (min-width: 1700px) {
     #next-week-div {
         font-size: 15px;
-        height: 400px;
+        height: 420px;
     }   
   }

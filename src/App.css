@@ -147,7 +147,6 @@ img {
 }
 
 .next-week-parent {
-  height: 300px;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -224,6 +223,8 @@ img {
 
   .next-week-parent {
     flex-direction: column;
+    height: 500px;
+    justify-content: flex-start;
   }
 }
 
@@ -238,8 +239,9 @@ img {
     margin-top: 100px;
   }
 
-  #next-week-parent {
+  .next-week-parent {
     margin-top: 0px;
+    height: 205px;
   }
 
   input {
@@ -265,8 +267,13 @@ img {
     margin-top: 135px;
   }
 
-  #next-week-parent {
+  #display {
+    margin-top: -20px;
+  }
+
+  .next-week-parent {
     margin-top: 50px;
+    height: 300px;
   }
 
   input {
