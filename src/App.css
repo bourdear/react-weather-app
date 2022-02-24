@@ -1,9 +1,17 @@
 html, body {
-  background: #132c40;
-  color: white;
   height: 100%;
+} 
+
+body {
+  background-repeat: no-repeat;
+  color: white;
+  min-height: 100%;
   margin: 0;
-  overflow: hidden;
+  overflow: auto;
+}
+
+#root {
+  height: 100%;
 }
 
 #app-parent {
@@ -45,9 +53,27 @@ input[type=text] {
   height: 40px;
 }
 
+input[type=text]:hover {
+  box-shadow:
+  0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+  0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+  0 12.5px 10px rgba(0, 0, 0, 0.06),
+  0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+  0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+  0 100px 80px rgba(0, 0, 0, 0.12)
+  ;
+  transition: all .015s ease-in-out;
+}
+
+input[type=text]:focus {
+  border-color: transparent;
+  box-shadow: 0 0 0 2px rgb(173, 173, 173);
+  outline: none;
+}
+ 
 input[type=button] {
   height: 38px;
-  margin-left: -85px;
+  margin-left: -78px;
   background-color: #032550;
   color: rgb(224, 224, 224);
 }
@@ -62,6 +88,15 @@ input {
   outline: none;
 }
 
+label {
+  display: block;
+  color: white;
+  right: 75px;
+  text-align: left;
+  margin-bottom: 10px;
+  position: absolute;
+}
+
 nav ul {
   list-style-type: none;
   margin: 0;
@@ -70,6 +105,7 @@ nav ul {
 }
 
 nav {
+  border-bottom: 1px solid #b5b5b5;
   position: fixed;
   top: 0px;
   height: 60px;
@@ -78,6 +114,7 @@ nav {
   width: 100%;
   color: #04316d;
   background: white;
+  z-index: 2;
 }
 
 li {
@@ -96,6 +133,10 @@ li:nth-child(3) {
   right: 0;
 }
 
+a {
+  text-decoration: none;
+}
+
 img {
   height: 60px;
 }
@@ -108,18 +149,8 @@ img {
 .next-week-parent {
   height: 300px;
   width: 100%;
-  margin-left: auto;
-  margin-right: auto;
   display: flex;
   justify-content: space-between;
-}
-
-#gray-div {
-  background-color: rgb(235, 235, 235);
-  height: 100vh;
-  width: 100%;
-  margin-top: -200px;
-  z-index: 0;
 }
 
 #display {
@@ -128,7 +159,80 @@ img {
   justify-content: space-around;
 }
 
+@media (max-width: 1199px) {
+  body {
+    background:#132c40;
+  }
+
+  #all-weather-parent {
+    display: flex;
+    flex-flow: column;
+    padding: 10px;
+    margin-top: 145px;
+    max-width: 600px;
+    width: 75%;
+    flex-grow: 1;
+  }
+
+  .navbar {
+    height: 60px;
+  }
+
+  .navbar2 {
+    height: 125px;
+  }
+
+  li {
+    font-size: 25px;
+  }
+
+  nav li {
+    display: block;
+  }
+
+  li:first-child {
+    position: static;
+    display: none;
+  }
+  
+  li:nth-child(3) {
+    position: static;
+  }
+
+  label {
+    position: inherit;
+    right: 0;
+    text-align: center;
+    margin-top: -10px;
+    margin-bottom: 25px;
+  }
+
+  input[type=text] {
+    width: 300px;
+    border-radius: 50px;
+    border: 1px solid gray;
+  }
+
+  input[type=button] {
+    border-radius: 50px;
+    margin-left: -63px;
+  }
+
+  #next-week-div {
+    display: none;
+  }
+
+  .next-week-parent {
+    flex-direction: column;
+  }
+}
+
 @media (min-width: 1200px) {
+  body {
+    background: linear-gradient( #132c40 550px, white 550px);
+    background-attachment: fixed;
+  }
+
   #all-weather-parent {
     width: 1200px;
     margin-top: 100px;
@@ -141,9 +245,21 @@ img {
   input {
     font-size: 18px;
   }
+
+  label {
+    font-size: 15px;
+    margin-top: -30px;
+    right: 95px;
+
+  }
 }
 
 @media (min-width: 1700px) {
+  body {
+    background: linear-gradient( #132c40 710px, white 550px);
+    background-attachment: fixed;
+  }
+
   #all-weather-parent {
     width: 1500px;
     margin-top: 135px;
@@ -155,5 +271,13 @@ img {
 
   input {
     font-size: 20px;
+  }
+
+  input[type=button] {
+    margin-left: -85px;
+  }
+
+  label {
+    margin-top: -60px;
   }
 }

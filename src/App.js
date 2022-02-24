@@ -12,7 +12,6 @@ import NextWeekExpanded from './components/NextWeekExpanded'
 import React, {useState} from 'react'
 import axios from 'axios'
 import moment from 'moment'
-// import apiKey from './openWeatherKey'
 
 function App() {
   const [search, setSearch] = useState('')
@@ -25,8 +24,9 @@ function App() {
   const [showNext, setShowNext] = useState(false)
   const [showErrOne, setShowErrOne] = useState(false)
   const [showErrTwo, setShowErrTwo] = useState(false)
+  const [smallWindow, setSmallWindow] = useState(true)
   const apiKey = process.env.REACT_APP_WEATHER_KEY
-
+  
   const errMessage = () => {
     if (!showData) {
       setShowErrOne(() => true)
@@ -87,23 +87,40 @@ function App() {
     }
   }
 
+  const handleKeyPress = (event) => {
+    if(event.key === 'Enter') {
+      getData()
+      setSearch('')
+    }
+  }
+
+  const handleResize = () => {
+    if (window.innerWidth <= 1199) {
+      setSmallWindow(true)
+    } else {
+      setSmallWindow(false)
+    }
+  }
+
   const capFirstLetter = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
 
+  window.addEventListener('resize', handleResize)
+
   return (
     <div id="app-parent">
-      <nav>
+      <nav className={!showData && smallWindow? "navbar" : "navbar2"}>
         <ul>
-          <li><img src={logo} alt="Weather Logo" /></li>
-          <li>MyWeather</li>
-          <li>{showData && <SearchBar search={search} handleSearch={handleSearch} handleClick={handleClick} showErr={showErrTwo} />}</li>
+          <li className='nav-items'><img src={logo} alt="Weather Logo" /></li>
+          <li className='nav-items'><a href='.'>MyWeather</a></li>
+          <li className='nav-items'>{showData && <SearchBar search={search} handleSearch={handleSearch} handleClick={handleClick} handleKeyPress={handleKeyPress} />}</li>
         </ul>
       </nav>
-      {!showData &&<div id="App">
+      {!showData && <div id="App">
         <h1>Worldwide Weather at Your Fingertips</h1>
           <p>Please enter a city</p> 
-          <SearchBar search={search} handleSearch={handleSearch} handleClick={handleClick}/>
+          <SearchBar search={search} handleSearch={handleSearch} handleClick={handleClick} handleKeyPress={handleKeyPress}/>
           {showErrOne && 
             <p>Sorry, we can't seem to find the city you're looking for.
             <br/>Try using the format "City, State" or "City, Country."</p>          
@@ -112,6 +129,8 @@ function App() {
       }
       {showData &&
         <div id="all-weather-parent">
+          {showErrTwo && <label>Sorry, we can't seem to find the city you're looking for.
+            <br/>Try using the format "City, State" or "City, Country."</label>}
           {showCurrent && <div id="display">
             <CurrentWeather
             time={moment.unix(apiData.dt).format('LT')}
@@ -202,9 +221,6 @@ function App() {
           </div>     
         </div>
       }  
-      {showData &&
-      <div id="gray-div"></div>
-      }
       </div>
   )
 }
