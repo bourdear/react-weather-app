@@ -1,26 +1,3 @@
 input:focus {
   outline: solid 1.75px #032550;
 }
-
-/* label {
-  display: block;
-  color: white;
-  text-align: left;
-
-}
-
-@media (min-width: 1200px) {
-  label {
-    padding: 3px;
-    font-size: 12px;
-    line-height: 1.25;
-  }
-}
-
-@media (min-width: 1700px) {
-  label {
-    padding: 5px;
-    font-size: 15px;
-    line-height: 1.5;
-  }
-} */
